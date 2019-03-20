@@ -43,7 +43,7 @@ class TouchBlock extends Interactive{
                             $cmd .= " " . $args;
                         }
                     }
-                    $data["command"] = $data;
+                    $data["command"] = $cmd;
                     break;
             }
         }

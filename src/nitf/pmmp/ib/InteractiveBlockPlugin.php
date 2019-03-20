@@ -28,7 +28,7 @@ class InteractiveBlockPlugin extends PluginBase implements Listener{
         return $vector3->getX() + $vector3->getY() + $vector3->getZ();
     }
 
-    private function onInteract(PlayerInteractEvent $e): void{
+    public function onInteract(PlayerInteractEvent $e): void{
         $player = $e->getPlayer();
         $block = $e->getBlock();
 
@@ -43,18 +43,18 @@ class InteractiveBlockPlugin extends PluginBase implements Listener{
         $callable = $block->getCallable();
         $data = $block->getData();
         if (isset($callable)){
-            $callable($player, $data);
+            $callable($e, $player, $data);
         }
         $e->setCancelled();
     }
 
     public function isInteractiveBlock(Block $block): bool{
-        $id = self::createId($block->getVector3());
+        $id = self::createId(new Vector3($block->getX(), $block->getY(), $block->getZ()));
         return isset(self::$blocks[$id]);
     }
 
     public function getType(Block $block): string{
-        $id = self::createId($block->getVector3());
+        $id = self::createId(new Vector3($block->getX(), $block->getY(), $block->getZ()));
         switch (true){
             case self::$blocks[$id] instanceof TouchBlock:
                 return "TouchBlock";

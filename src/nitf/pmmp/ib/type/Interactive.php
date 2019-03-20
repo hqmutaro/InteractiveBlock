@@ -4,7 +4,7 @@ namespace nitf\pmmp\ib\type;
 
 use pocketmine\math\Vector3;
 
-abstract class Interactive{
+abstract class Interactive extends Vector3{
 
     /** @var array $pos */
     private $pos = [];
@@ -13,25 +13,15 @@ abstract class Interactive{
     private $callable = null;
 
     public function __construct(Vector3 $vector3, ?callable $callable){
-        $this->pos["x"] = $vector3->getX();
-        $this->pos["y"] = $vector3->getY();
-        $this->pos["z"] = $vector3->getZ();
+        parent::__construct($vector3->getX(), $vector3->getY(), $vector3->getZ());
         $this->callable = $callable;
-    }
-
-    public function getX(): int{
-        return $this->pos["x"];
-    }
-
-    public function getY(): int{
-        return $this->pos["y"];
-    }
-
-    public function getZ(): int{
-        return $this->pos["z"];
     }
 
     public function getCallable(): ?callable{
         return $this->callable;
+    }
+
+    public function setCallable(?callable $callable): void{
+        $this->callable = $callable;
     }
 }
