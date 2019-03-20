@@ -45,7 +45,6 @@ class InteractiveBlockPlugin extends PluginBase implements Listener{
         if (isset($callable)){
             $callable($e, $player, $data);
         }
-        $e->setCancelled();
     }
 
     public function isInteractiveBlock(Block $block): bool{
